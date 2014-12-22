@@ -1,0 +1,24 @@
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<%= csrf_meta_tags %>
+
+<title>
+  <% if content_for? :title %>
+    <%= yield :title %>
+  <% else %>
+    <%= "Spree #{Spree.t('administration')}: " %>
+    <%= Spree.t(controller.controller_name, :default => controller.controller_name.titleize) %>
+  <% end %>
+</title>
+
+<%= stylesheet_link_tag 'spree/backend/all' %>
+
+<%= javascript_include_tag 'spree/backend/all' %>
+<%= render "spree/admin/shared/translations" %>
+
+<%= javascript_tag do -%>
+  <%== "var AUTH_TOKEN = #{form_authenticity_token.inspect};" %>
+<% end -%>
+
+<%= yield :head %>
